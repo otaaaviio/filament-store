@@ -16,7 +16,7 @@ use Illuminate\Notifications\Notifiable;
  * @property string $name
  * @property string $email
  * @property string $email_verified_at
- * @property boolean $is_admin
+ * @property bool $is_admin
  * @property string $password
  * @property Carbon $created_at
  * @property Carbon $updated_at
@@ -25,6 +25,7 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable
 {
     use HasFactory, Notifiable, SoftDeletes;
+
     protected $primaryKey = 'user_id';
 
     protected $fillable = [
@@ -41,7 +42,7 @@ class User extends Authenticatable
 
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'password' => 'hashed'
+        'password' => 'hashed',
     ];
 
     public function orders(): HasMany

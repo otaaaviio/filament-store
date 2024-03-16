@@ -21,7 +21,7 @@ trait EnumHelpers
 
     public static function isValid(string $value): bool
     {
-        return null !== self::tryFrom($value);
+        return self::tryFrom($value) !== null;
     }
 
     public static function options(): array

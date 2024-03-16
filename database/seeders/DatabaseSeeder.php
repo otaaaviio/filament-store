@@ -9,7 +9,6 @@ use App\Models\ProductReview;
 use App\Models\ProductsOrder;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Database\Factories\OrderFactory;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -24,7 +23,7 @@ class DatabaseSeeder extends Seeder
         User::factory()->create([
             'name' => 'Admin User',
             'email' => 'adm@adm.com',
-            'is_admin' => true
+            'is_admin' => true,
         ]);
 
         $orders = Order::factory(20)->create();

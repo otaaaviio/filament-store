@@ -23,18 +23,20 @@ use Illuminate\Support\Carbon;
 class Order extends Model
 {
     use HasFactory, SoftDeletes;
+
     protected $primaryKey = 'order_id';
+
     protected $fillable = [
         'user_id',
-        'order_status_id' => OrderStatusEnum::class
+        'order_status_id' => OrderStatusEnum::class,
     ];
 
-    public function user():BelongsTo
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id', 'user_id');
     }
 
-    public function status():BelongsTo
+    public function status(): BelongsTo
     {
         return $this->belongsTo(OrderStatus::class, 'order_status_id', 'order_status_id');
     }
@@ -46,11 +48,10 @@ class Order extends Model
             ->using(ProductsOrder::class);
     }
 
-    public function totalPrice(): Float
+    public function totalPrice(): float
     {
         return $this->products()->withPivot('quantity')->get()->sum(function ($product) {
             return $product->price * $product->pivot->quantity;
         });
     }
-
 }

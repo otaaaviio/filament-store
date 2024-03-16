@@ -16,7 +16,7 @@ use Illuminate\Support\Carbon;
  * @property int $product_id
  * @property string $name
  * @property string $description
- * @property double $price
+ * @property float $price
  * @property int $quantity_stock
  * @property int $product_category_id
  * @property Carbon $created_at
@@ -26,6 +26,7 @@ use Illuminate\Support\Carbon;
 class Product extends Model
 {
     use HasFactory, SoftDeletes;
+
     protected $primaryKey = 'product_id';
 
     protected $fillable = [
@@ -33,7 +34,7 @@ class Product extends Model
         'description',
         'price',
         'quantity_stock',
-        'product_category_id'
+        'product_category_id',
     ];
 
     public function category(): BelongsTo

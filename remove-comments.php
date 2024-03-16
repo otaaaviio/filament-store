@@ -23,10 +23,10 @@ $directories = [
 $base = './';
 
 foreach ($directories as $dir) {
-    $it = new RecursiveDirectoryIterator($base . $dir);
+    $it = new RecursiveDirectoryIterator($base.$dir);
     foreach (new RecursiveIteratorIterator($it) as $file) {
         if ($file->getExtension() == 'php') {
-            echo "Removing comments from: " . $file->getRealPath() . "\n";
+            echo 'Removing comments from: '.$file->getRealPath()."\n";
             $contents = file_get_contents($file->getRealPath());
             $new = preg_replace('/^(\{?)\s*?\/\*(.|[\r\n])*?\*\/([\r\n]+$|$)/im', '$1', $contents);
             file_put_contents($file->getRealPath(), $new);

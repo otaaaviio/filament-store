@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
@@ -22,7 +21,9 @@ use Illuminate\Support\Carbon;
 class ProductsOrder extends Pivot
 {
     use HasFactory, SoftDeletes;
+
     protected $primaryKey = 'product_order_id';
+
     protected $table = 'products_orders';
 
     protected $fillable = [

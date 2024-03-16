@@ -23,13 +23,14 @@ use Illuminate\Support\Carbon;
 class ProductReview extends Model
 {
     use HasFactory, SoftDeletes;
+
     protected $primaryKey = 'product_review_id';
 
     protected $fillable = [
         'product_id',
         'user_id',
         'review',
-        'rating'
+        'rating',
     ];
 
     public function product(): BelongsTo

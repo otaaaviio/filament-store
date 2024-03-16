@@ -16,11 +16,13 @@ use Illuminate\Support\Carbon;
  * @property Carbon $created_at
  * @property Carbon $updated_at
  * @property Carbon|null $deleted_at
+ *
  * @method static create(array $array)
  */
 class ProductCategory extends Model
 {
     use HasFactory, SoftDeletes;
+
     protected $primaryKey = 'product_category_id';
 
     protected $fillable = [

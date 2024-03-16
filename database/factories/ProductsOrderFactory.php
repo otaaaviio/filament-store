@@ -15,6 +15,7 @@ class ProductsOrderFactory extends Factory
     public function definition(): array
     {
         $product = Product::factory()->create();
+
         return [
             'order_id' => Order::factory(),
             'product_id' => $product->product_id,
