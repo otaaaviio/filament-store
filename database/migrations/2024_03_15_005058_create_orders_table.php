@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('order_status', function (Blueprint $table) {
             $table->id('order_status_id');
-            $table->text('name');
+            $table->text('name')->unique();
         });
 
         Schema::create('orders', function (Blueprint $table) {

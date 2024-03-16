@@ -12,10 +12,10 @@ return new class extends Migration
             $table->id('product_review_id');
             $table->foreignId('product_id')->constrained('products', 'product_id');
             $table->foreignId('user_id')->constrained('users', 'user_id');
-            $table->text('review');
-            $table->integer('rating');
+            $table->string('review', 255);
+            $table->decimal('rating', 2, 1);
             $table->timestamps();
-            $table->softDeletes()->nullable();
+            $table->softDeletes();
         });
     }
 

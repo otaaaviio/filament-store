@@ -18,7 +18,7 @@ return new class extends Migration
             $table->text('password');
             $table->rememberToken();
             $table->timestamps();
-            $table->softDeletes()->nullable();
+            $table->softDeletes();
         });
 
         Schema::table('users', function () {
@@ -34,10 +34,7 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('users');
-        Schema::table('users', function () {
-            DB::statement('DROP INDEX unique_email_when_not_deleted');
-        });
         Schema::dropIfExists('password_reset_tokens');
+        Schema::dropIfExists('users');
     }
 };
