@@ -2,14 +2,30 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+/**
+ * App/Models/User
+ *
+ * @property int $user_id
+ * @property string $name
+ * @property string $email
+ * @property string $email_verified_at
+ * @property boolean $is_admin
+ * @property string $password
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
+ * @property Carbon|null $deleted_at
+ */
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, SoftDeletes;
+    protected $primaryKey = 'user_id';
 
     protected $fillable = [
         'name',
@@ -18,15 +34,23 @@ class User extends Authenticatable
     ];
 
     protected $hidden = [
+        'is_admin',
         'password',
         'remember_token',
     ];
 
-    protected function casts(): array
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+        'password' => 'hashed'
+    ];
+
+    public function orders(): HasMany
     {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
+        return $this->hasMany(Order::class, 'user_id', 'user_id');
+    }
+
+    public function productReviews(): HasMany
+    {
+        return $this->hasMany(ProductReview::class, 'user_id', 'user_id');
     }
 }
