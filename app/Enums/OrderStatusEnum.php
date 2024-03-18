@@ -15,6 +15,18 @@ enum OrderStatusEnum: int
     case DELIVERED = 5;
     case CANCELLED = 6;
 
+    public static function getColor($value): string
+    {
+        return match ($value) {
+            self::PENDING->value => 'gray',
+            self::PROCESSING->value => 'warning',
+            self::PAID->value => 'success',
+            self::SHIPPED->value => 'info',
+            self::DELIVERED->value => 'indigo',
+            self::CANCELLED->value => 'danger',
+        };
+    }
+
     public static function getLabels(): array
     {
         return [

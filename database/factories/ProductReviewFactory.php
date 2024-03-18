@@ -18,7 +18,7 @@ class ProductReviewFactory extends Factory
             'product_id' => Product::factory(),
             'user_id' => User::factory(),
             'review' => $this->faker->text(255),
-            'rating' => $this->faker->randomFloat(1, 1, 5),
+            'rating' => $this->faker->numberBetween(1, 5),
         ];
     }
 }

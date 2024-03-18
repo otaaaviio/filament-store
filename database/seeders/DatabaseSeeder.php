@@ -40,8 +40,8 @@ class DatabaseSeeder extends Seeder
             ->recycle($products)
             ->create();
 
-        ProductImage::factory(20)
-            ->recycle($products)
-            ->create();
+//        ProductImage::factory(20)
+//            ->recycle($products)
+//            ->create();
     }
 }
