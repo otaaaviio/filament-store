@@ -22,7 +22,7 @@ class ProductReviewRelationManager extends RelationManager
             ->columns([
                 Tables\Columns\TextColumn::make('product.name')
                     ->label('Produto')
-                    ->url(fn ($record) => '/admin/products/' . $record->product_id)
+                    ->url(fn ($record) => '/admin/products/'.$record->product_id)
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('review')
@@ -41,7 +41,7 @@ class ProductReviewRelationManager extends RelationManager
                     ->label('Avaliação')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime('d / m / y')
+                    ->dateTime('d/m/y')
                     ->label('Data da Avaliação')
                     ->toggleable(isToggledHiddenByDefault: true),
             ]);

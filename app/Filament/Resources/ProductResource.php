@@ -123,7 +123,7 @@ class ProductResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Registrado em')
-                    ->dateTime('d / m / y')
+                    ->dateTime('d/m/y')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
@@ -134,7 +134,7 @@ class ProductResource extends Resource
             ])
             ->actions([
                 Tables\Actions\ViewAction::make()
-                ->label('')
+                    ->label(''),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -170,7 +170,7 @@ class ProductResource extends Resource
                             })
                             ->color('gray'),
                         TextEntry::make('created_at')
-                            ->dateTime('d / m / y')
+                            ->dateTime('d/m/y')
                             ->label('Data de registro'),
                         TextEntry::make('description')
                             ->label('Descrição')

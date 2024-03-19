@@ -43,7 +43,7 @@ class OrderRelationManager extends RelationManager
                     ->money('BRL'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Data do Pedido')
-                    ->dateTime('d / m / y')
+                    ->dateTime('d/m/y')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('status.name')
@@ -58,7 +58,7 @@ class OrderRelationManager extends RelationManager
             ->actions([
                 ViewAction::make()
                     ->label('')
-                ->url(fn ($record) => '/admin/orders/' . $record->order_id),
+                    ->url(fn ($record) => '/admin/orders/'.$record->order_id),
             ]);
     }
 }

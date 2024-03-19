@@ -5,9 +5,7 @@ namespace App\Filament\Resources;
 use App\Enums\OrderStatusEnum;
 use App\Filament\Resources\OrderResource\Pages;
 use App\Models\Order;
-use App\Models\Product;
 use Exception;
-use Filament\Infolists\Components\KeyValueEntry;
 use Filament\Infolists\Components\Section;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Infolists\Infolist;
@@ -54,7 +52,7 @@ class OrderResource extends Resource
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Data do Pedido')
-                    ->dateTime('d / m / y')
+                    ->dateTime('d/m/y')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
@@ -72,7 +70,7 @@ class OrderResource extends Resource
                     ->schema([
                         TextEntry::make('user.name')
                             ->label('')
-                            ->url(fn (Order $record) => '/admin/users/' . $record->user->user_id)
+                            ->url(fn (Order $record) => '/admin/users/'.$record->user->user_id)
                             ->columnSpanFull()
                             ->color('gray'),
                     ]),
@@ -93,6 +91,7 @@ class OrderResource extends Resource
                             ->color(fn ($record) => OrderStatusEnum::getColor($record->status->order_status_id))
                             ->label('Status'),
                         TextEntry::make('created_at')
+                            ->dateTime('d/m/y')
                             ->label('Data do Pedido')
                             ->color('gray'),
                     ]),
@@ -102,8 +101,9 @@ class OrderResource extends Resource
                             ->getStateUsing(function ($record) {
                                 $products = [];
                                 foreach ($record->products as $product) {
-                                    $products[] = '<a href="/admin/products/' . $product->product_id . '">' . '• ' . $product->name . ' (' . $product->pivot->quantity . ' Unidades)' . '</a>';
+                                    $products[] = '<a href="/admin/products/'.$product->product_id.'">'.'• '.$product->name.' ('.$product->pivot->quantity.' Unidades)'.'</a>';
                                 }
+
                                 return $products;
                             })
                             ->html()
