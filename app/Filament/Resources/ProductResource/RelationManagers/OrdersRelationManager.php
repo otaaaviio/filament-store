@@ -19,7 +19,6 @@ class OrdersRelationManager extends RelationManager
             ->recordTitleAttribute('product_id')
             ->columns([
                 Tables\Columns\TextColumn::make('order_id')
-                    ->sortable()
                     ->label('Código do Pedido'),
                 Tables\Columns\TextColumn::make('user.name')
                     ->sortable()

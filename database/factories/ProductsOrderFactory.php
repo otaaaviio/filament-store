@@ -19,7 +19,7 @@ class ProductsOrderFactory extends Factory
         return [
             'order_id' => Order::factory(),
             'product_id' => $product->product_id,
-            'quantity' => $this->faker->numberBetween(0, $product->quantity_stock),
+            'quantity' => $this->faker->numberBetween(1, $product->quantity_stock),
         ];
     }
 }

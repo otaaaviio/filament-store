@@ -3,6 +3,8 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\ProductResource\Pages;
+use App\Filament\Resources\ProductResource\RelationManagers\OrdersRelationManager;
+use App\Filament\Resources\ProductResource\RelationManagers\ReviewsRelationManager;
 use App\Models\Product;
 use Exception;
 use Filament\Forms;
@@ -106,6 +108,7 @@ class ProductResource extends Resource
                     ->limit(2)
                     ->circular(),
                 Tables\Columns\TextColumn::make('category.name')
+                    ->default('Sem categoria')
                     ->label('Categoria')
                     ->searchable()
                     ->sortable(),
@@ -116,11 +119,9 @@ class ProductResource extends Resource
                     ->label('Preço Un.')
                     ->money('BRL')
                     ->sortable(),
-                Tables\Columns\TextColumn::make('average_rating')
-                    ->limit(1)
-                    ->label('Média de Avaliação')
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('star_rating')
+                    ->default('Sem avaliações')
+                    ->label('Média de Avaliação'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Registrado em')
                     ->dateTime('d/m/y')
@@ -154,6 +155,7 @@ class ProductResource extends Resource
                             ->label('Nome')
                             ->color('gray'),
                         TextEntry::make('category.name')
+                            ->default('Sem categoria')
                             ->label('Categoria')
                             ->color('gray'),
                         TextEntry::make('price')
@@ -163,14 +165,13 @@ class ProductResource extends Resource
                         TextEntry::make('quantity_stock')
                             ->label('Quantidade em Estoque')
                             ->color('gray'),
-                        TextEntry::make('Average Rating', 'average_rating')
+                        TextEntry::make('star_rating')
                             ->label('Média de Avaliação')
-                            ->getStateUsing(function ($record) {
-                                return $record->average_rating ?? 'Sem avaliações';
-                            })
+                            ->default('Sem avaliações ')
                             ->color('gray'),
                         TextEntry::make('created_at')
                             ->dateTime('d/m/y')
+                            ->color('gray')
                             ->label('Data de registro'),
                         TextEntry::make('description')
                             ->label('Descrição')
@@ -178,6 +179,7 @@ class ProductResource extends Resource
                             ->columnSpanFull()
                             ->color('gray'),
                         SpatieMediaLibraryImageEntry::make('images')
+                            ->conversion('thumbnail')
                             ->label('Imagens')
                             ->allCollections()
                             ->columnSpanFull(),
@@ -188,7 +190,8 @@ class ProductResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            ReviewsRelationManager::class,
+            OrdersRelationManager::class,
         ];
     }
 

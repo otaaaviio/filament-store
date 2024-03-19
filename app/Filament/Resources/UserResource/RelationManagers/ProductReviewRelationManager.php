@@ -28,6 +28,7 @@ class ProductReviewRelationManager extends RelationManager
                 Tables\Columns\TextColumn::make('review')
                     ->label('Descrição da Avaliação')
                     ->limit(30)
+                    ->searchable()
                     ->tooltip(function (Tables\Columns\TextColumn $column): ?string {
                         $state = $column->getState();
                         if (strlen($state) <= $column->getCharacterLimit()) {
@@ -38,6 +39,7 @@ class ProductReviewRelationManager extends RelationManager
                     })
                     ->sortable(),
                 Tables\Columns\TextColumn::make('rating')
+                    ->getStateUsing(fn ($record) => str_repeat('⭐ ', $record->rating))
                     ->label('Avaliação')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')

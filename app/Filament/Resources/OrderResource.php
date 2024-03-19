@@ -46,6 +46,7 @@ class OrderResource extends Resource
                     })
                     ->label('N° de Produtos'),
                 Tables\Columns\TextColumn::make('total_price')
+                    ->money('BRL')
                     ->label('Valor Total'),
                 Tables\Columns\TextColumn::make('status.name')
                     ->color(fn ($record) => OrderStatusEnum::getColor($record->status->order_status_id))
@@ -58,6 +59,7 @@ class OrderResource extends Resource
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('order_status_id')
+                    ->label('Status')
                     ->relationship('status', 'name'),
             ]);
     }

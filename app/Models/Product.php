@@ -54,9 +54,11 @@ class Product extends Model implements HasMedia
         return $this->hasMany(ProductReview::class, 'product_id', 'product_id');
     }
 
-    public function getAverageRatingAttribute()
+    public function getStarRatingAttribute(): string
     {
-        return $this->reviews->avg('rating');
+        $average_rating = round($this->reviews->avg('rating'));
+
+        return str_repeat('⭐ ', $average_rating);
     }
 
     public function orders(): BelongsToMany

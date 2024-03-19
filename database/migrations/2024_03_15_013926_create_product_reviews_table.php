@@ -13,7 +13,7 @@ return new class extends Migration
             $table->foreignId('product_id')->constrained('products', 'product_id');
             $table->foreignId('user_id')->constrained('users', 'user_id');
             $table->string('review', 255);
-            $table->decimal('rating', 2, 1);
+            $table->integer('rating');
             $table->timestamps();
             $table->softDeletes();
         });
